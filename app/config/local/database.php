@@ -23,12 +23,11 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'homestead',
+            'port'      => 3306,
+			'database'  => 'lycdb',
 			'username'  => 'homestead',
 			'password'  => 'secret',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'prefix'    => 'lycdb_',
 		),
 
 		'pgsql' => array(

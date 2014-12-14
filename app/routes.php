@@ -10,8 +10,25 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+/** @var Illuminate\Routing\Router $router */
+$router = Route::getFacadeRoot();
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+$router->get('/', 'HomeController@index');
+
+$router->resource('search', 'SearchController');
+
+
+/*
+|--------------------------------------------------------------------------
+| Authentication & Password Reset Controllers
+|--------------------------------------------------------------------------
+|
+| These two controllers handle the authentication of the users of your
+| application, as well as the functions necessary for resetting the
+| passwords for your users. You may modify or remove these files.
+|
+*/
+
+//$router->controller('auth', 'AuthController');
+
+//$router->controller('password', 'PasswordController');

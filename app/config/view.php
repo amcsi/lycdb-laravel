@@ -28,4 +28,10 @@ return array(
 
 	'pagination' => 'pagination::slider-3',
 
+    'shared_vars' => [
+        'google_analytics' => [
+            'code' => null, // google analytics code to override
+            'domain' => 'lycee-tcg.eu',
+        ],
+    ],
 );

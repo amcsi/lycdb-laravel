@@ -54,13 +54,14 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'forge',
-			'username'  => 'forge',
-			'password'  => '',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'host'      => getenv('MYSQL_HOST'),
+            'port'      => getenv('MYSQL_PORT'),
+			'database'  => 'lycdb',
+			'username'  => getenv('MYSQL_USER'),
+			'password'  => getenv('MYSQL_PASS'),
+			'charset'   => 'utf8mb4',
+			'collation' => 'utf8mb4_unicode_ci',
+			'prefix'    => 'lycdb_',
 		),
 
 		'pgsql' => array(

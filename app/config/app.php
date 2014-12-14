@@ -122,6 +122,10 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'Lycee\Providers\IocServiceProvider',
+        'Lycee\Providers\ArtisanServiceProvider',
+        'Lycee\Providers\SharedViewVarsProvider',
+        'Lycee\Providers\ViewHelpersProvider',
 	),
 
 	/*
@@ -188,6 +192,8 @@ return array(
 		'URL'               => 'Illuminate\Support\Facades\URL',
 		'Validator'         => 'Illuminate\Support\Facades\Validator',
 		'View'              => 'Illuminate\Support\Facades\View',
+
+        'Helper' => 'Lycee\Facade\Helper',
 
 	),
 

@@ -10,6 +10,9 @@
 		"laravel/framework": "4.2.*"
 	},
 	"autoload": {
+        "psr-4": {
+            "Lycee\\": "src"
+        },
 		"classmap": [
 			"app/commands",
 			"app/controllers",
