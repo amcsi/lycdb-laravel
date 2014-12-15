@@ -130,7 +130,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                     </td>
                     @if (!$card['type'])
                     <td class="positions">
-                        {{ Helper::lycdbMarkupToHtml($card['position_markup']) }}
+                        {{ Helper::lycdbMarkupToHtml(Helper::markupPositionByCard($card)) }}
                     </td>
                     <td class="ap">
                         {{{ $card['ap'] }}}
@@ -203,7 +203,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                     <div class='left sp'>{{{ $card['sp'] }}}</div>
                 </div>
                 <div class="card_js_spots">
-                    {{ Helper::lycdbMarkupToHtml($card['position_markup']) }}
+                    {{ Helper::lycdbMarkupToHtml(Helper::markupPositionByCard($card)) }}
                 </div>
                 <div class="card_js_text card_js_detail_full">
                     @if ($card['conversion_jp'])

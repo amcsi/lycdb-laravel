@@ -4,6 +4,7 @@ namespace Lycee\Tool;
 
 use Illuminate\Container\Container;
 use Lycee\Card\Eloquent;
+use Lycee\Importer\Lycee\Char;
 
 /**x
  *
@@ -85,5 +86,24 @@ class Helper
         }
 
         return $displayElements;
+    }
+
+    public function markupPositionByCard(Eloquent $card)
+    {
+        $ret = '';
+
+        if ($card::TYPE_CHAR == $card['type']) {
+            $pm = '';
+            $pm .= Char::AL_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $pm .= Char::AC_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $pm .= Char::AR_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $pm .= "\n";
+            $pm .= Char::DL_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $pm .= Char::DC_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $pm .= Char::DR_FLAG & $card['position_flags'] ? '[on]' : '[off]';
+            $ret = $pm;
+        }
+
+        return $ret;
     }
 }
