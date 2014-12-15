@@ -209,8 +209,8 @@ We are already aware of this error and will fix it sometime soon so please don't
                     @if ($card['conversion_jp'])
                     <span class="conversion">{{{ Lang::trans('Conversion') }}}: {{{ $card['conversion_jp'] }}}</span>
                     @endif
-                    @if ($card['display_basic_abilities_jp_markup'])
-                    @foreach ($card['display_basic_abilities_jp_markup'] as $basicAbility)
+                    @if ($card['basic_abilities_jp'])
+                    @foreach (explode("\n", $card['basic_abilities_jp']) as $basicAbility)
                     <p class="basic_ability_name">
                         {{ Helper::lycdbMarkupToHtml($basicAbility) }}
                     </p>

@@ -61,7 +61,10 @@ class MarkupToHtml
      */
     private function basicAbilityCallback(array $matches)
     {
-        return $this->basicAbility->normalizeAndTranslate($matches[1]);
+        return sprintf(
+            '<span class="basicAbility">%s</span>',
+            $this->basicAbility->normalizeAndTranslate($matches[1])
+        );
     }
 
 }

@@ -266,8 +266,8 @@ class Char extends Card {
         $basicAbilitiesJpFlipped = $this->getJapaneseBasicAbilityFlippedMap();
         $basicAbilitiesEnFlipped = $this->getEnglishBasicAbilityFlippedMap();
         foreach ($this->basicAbilities as $key => $val) {
-            $babJp = $basicAbilitiesJpFlipped[$key];
-            $babEn = $basicAbilitiesEnFlipped[$key];
+            $babEn = "%b($basicAbilitiesEnFlipped[$key])";
+            $babJp = $babEn;
             if ($val instanceof Cost) {
                 $textPart = $val->toLycdbMarkup();
                 $babEn .= " $textPart";

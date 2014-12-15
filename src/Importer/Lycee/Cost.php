@@ -59,7 +59,7 @@ class Cost extends Lycee {
             str_repeat('[star]', $this->getCostElement(self::STAR))
         ;
         if ($this->text) {
-            $ret .= " $this->text";
+            $ret .= " [cost]$this->text[/cost]";
         }
         return $ret;
     }
