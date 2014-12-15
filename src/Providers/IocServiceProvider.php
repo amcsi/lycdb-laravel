@@ -82,6 +82,14 @@ class IocServiceProvider extends ServiceProvider {
             return $app->make('translator');
         });
 
+        $app->singleton('Lycee\Card\FetchService', function ($app) {
+            $params = [
+                'lyceeConfig' => $app->make('config')['lycee'],
+            ];
+
+            return $app->build('Lycee\Card\FetchService', $params);
+        });
+
         $this->configServices();
     }
 

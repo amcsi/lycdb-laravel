@@ -88,8 +88,6 @@ class Eloquent extends Model {
             $eq = $options['ex_equality'];
             if (!$options['ex'] && 0 < $options['ex_equality']) {
             }
-            else if (\Lycee\Config::MAX_EX_VALUE <= $options['ex'] && $options['ex_equality'] < 0) {
-            }
             else {
                 $op = '=';
                 if ($eq < 0) {
@@ -108,6 +106,8 @@ class Eloquent extends Model {
 
         //$builder->paginate($perPage);
         $builder->limit($perPage);
+
+        //dd($builder->getQuery()->toSql());
 
         $result = $builder->get();
 
@@ -253,9 +253,10 @@ class Eloquent extends Model {
 
     public function scopeCostsExactly(Builder $query, array $costs)
     {
-        foreach ($this->elements as $key => $element) {
-            $costAmount = isset($costs[$key]) ? $costs[$key] : 0;
-            $query->where("cost_$element", '=', $costAmount);
+        foreach ($this->elements as $enum => $element) {
+            $elementKey = $element['key'];
+            $costAmount = isset($costs[$enum]) ? $costs[$enum] : 0;
+            $query->where("cost_$elementKey", '=', $costAmount);
         }
     }
 
