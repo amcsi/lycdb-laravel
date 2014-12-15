@@ -108,7 +108,7 @@
 
             <tbody>
                 @foreach ($cards as $key => $card)
-                <tr id="card_result_{{{ $card['cid'] }}}" class="{{{ $card['type_text'] }}} {{{ $key % 2 ? 'odd' : 'even' }}}">
+                <tr id="card_result_{{{ $card['cid'] }}}" class="{{{ Helper::getTypeTextByCard($card) }}} {{{ $key % 2 ? 'odd' : 'even' }}}">
                     <td class="cardId">{{{ $card['cid'] }}}</td>
                     <td class="cardName">{{{ $card['name_jp'] }}}
                     @if ($card['import_errors'])
@@ -165,7 +165,7 @@ We are already aware of this error and will fix it sometime soon so please don't
     <div id='hidden'>
         @if ($cards)
         @foreach($cards as $key => $card)
-        <div class="card_js {{{ $card['type_text'] }}}" id="card_js_{{{ $card['cid'] }}}" style="display: none;">
+        <div class="card_js {{{ Helper::getTypeTextByCard($card) }}}" id="card_js_{{{ $card['cid'] }}}" style="display: none;">
             <div class="card_js_image" data-src="{{{ asset("lycee_images/180/$card[cid]") }}}" data-width="180">
             </div>
             <div class="card_js_details">
