@@ -54,7 +54,7 @@ return [
         'Defender', // _('Defender')
         'Bonus', // _('Bonus')
         'Penalty', // _('Penalty')
-        'Dock Bonus', // _('Dock Bonus')
+        'Deck Bonus', // _('Deck Bonus')
         'Dash', // _('Dash')
         'Aggressive', // _('Aggressive')
         'Boost', // _('Boost')
