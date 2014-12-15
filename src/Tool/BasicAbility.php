@@ -2,6 +2,7 @@
 
 namespace Lycee\Tool;
 
+use Lycee\Config\BasicAbilities;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class BasicAbility
@@ -12,12 +13,12 @@ class BasicAbility
      */
     private $_;
     /**
-     * @var array
+     * @var BasicAbilities
      */
     private $basicAbilities;
     private $basicAbilitiesNormalizeMap;
 
-    function __construct(TranslatorInterface $_, array $basicAbilities)
+    function __construct(TranslatorInterface $_, BasicAbilities $basicAbilities)
     {
         $this->_ = $_;
         $this->basicAbilities = $basicAbilities;

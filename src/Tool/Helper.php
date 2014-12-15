@@ -2,7 +2,7 @@
 
 namespace Lycee\Tool;
 
-use Illuminate\Contracts\Container\Container;
+use Illuminate\Container\Container;
 
 /**x
  *

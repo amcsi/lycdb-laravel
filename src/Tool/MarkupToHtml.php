@@ -2,6 +2,8 @@
 
 namespace Lycee\Tool;
 
+use Lycee\Config\Elements;
+
 class MarkupToHtml
 {
 
@@ -15,7 +17,7 @@ class MarkupToHtml
      */
     private $basicAbility;
 
-    function __construct(array $elements, $imgBase, BasicAbility $basicAbility)
+    function __construct(Elements $elements, $imgBase, BasicAbility $basicAbility)
     {
         $this->elements = $elements;
         $this->imgBase = $imgBase;
@@ -29,7 +31,7 @@ class MarkupToHtml
 
         $imgBase = $this->imgBase;
         foreach ($this->elements as $element) {
-            $elementName = $element['name'];
+            $elementName = $element['key'];
             $string = str_replace(
                 "[$elementName]",
                 $this->getImgTag("$imgBase/$elementName.gif", "[$elementName]"),

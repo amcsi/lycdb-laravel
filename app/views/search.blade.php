@@ -3,7 +3,7 @@
 @section('content')
 
         <input type='button' value='Show/hide basic search' onclick="show_hide('basic_search_form');">
-        <form id='basic_search_form' method='get' action='{{ URL::current() }}' class="basicSearchForm">
+        <form id='basic_search_form' method='get' action='{{{ URL::current() }}}' class="basicSearchForm">
             <input type="hidden" name="search" value="1">
             <fieldset class="card_search">
                 <legend>Basic search</legend>
@@ -36,7 +36,7 @@
                             <option value="2">is exactly:</option>
                         </select>
                         @foreach ($lyceeConfig['elements'] as $element)
-                        <label for="basic_search_cost_{{ $element['key'] }}"><img alt='{{ $element['key'] }}' src="{{asset("img/$element[key].gif")}}"></label>
+                        <label for="basic_search_cost_{{{ $element['key'] }}}"><img alt='{{{ $element['key'] }}}' src="{{{asset("img/$element[key].gif")}}}"></label>
                         {{ Form::selectRange("cost_$element[key]", 0, $lyceeConfig['max_cost'], ['id' => "cost_$element[key]"]) }}
                         @endforeach
                     </li>
@@ -57,10 +57,10 @@
                             <option value='2'>is:</option>
                         </select>
                         @foreach ($lyceeConfig['elements'] as $element)
-                        <label for="basic_search_element_{{ $element['key'] }}">
-                            <img alt='{{ $element['key'] }}' src="{{asset("img/$element[key].gif")}}">
+                        <label for="basic_search_element_{{{ $element['key'] }}}">
+                            <img alt='{{{ $element['key'] }}}' src="{{{asset("img/$element[key].gif")}}}">
                         </label>
-                        <input type="checkbox" id="basic_search_element_{{ $element['key'] }}" name="element_{{ $element['key'] }}">
+                        <input type="checkbox" id="basic_search_element_{{{ $element['key'] }}}" name="element_{{{ $element['key'] }}}">
                         @endforeach
                     </li>
                     <li>
@@ -108,38 +108,38 @@
 
             <tbody>
                 @foreach ($cards as $key => $card)
-                <tr id="card_result_{{ $card['cid'] }}" class="{{ $card['type_text'] }} {{ $key % 2 ? 'odd' : 'even' }}">
-                    <td class="cardId">{{ $card['cid'] }}</td>
-                    <td class="cardName">{{ $card['name_jp'] }}
+                <tr id="card_result_{{{ $card['cid'] }}}" class="{{{ $card['type_text'] }}} {{{ $key % 2 ? 'odd' : 'even' }}}">
+                    <td class="cardId">{{{ $card['cid'] }}}</td>
+                    <td class="cardName">{{{ $card['name_jp'] }}}
                     @if ($card['import_errors'])
                         <span class="clickable tooltip" title="Notice: The import script has reported errors regarding this card.
-We are already aware of this error and will fix it sometime soon so please don't report it to us."><img src="<?= $this->basePath() ?>/img/exclamation-red-frame.png" alt="warning"></span>
+We are already aware of this error and will fix it sometime soon so please don't report it to us."><img src="{{{ asset('img/exclamation-red-frame.png') }}}" alt="warning"></span>
                     @endif
                     </td>
                     <td class="sets">
-                        {{ nl2br($this->escapeHtml($card['sets_string_short']), false) }}
+                        {{ nl2br(e($card['sets_string_short']), false) }}
                     </td>
                     <td class="cost">
-                        {!! Helper::lycdbMarkupToHtml($card['cost_markup']) !!}
+                        {{ Helper::lycdbMarkupToHtml($card['cost_markup']) }}
                     </td>
                     <td class="ex">
-                        {{ $card['ex'] }}
+                        {{{ $card['ex'] }}}
                     </td>
                     <td>
-                        {!! Helper::lycdbMarkupToHtml($card['elements_markup']) !!}
+                        {{ Helper::lycdbMarkupToHtml($card['elements_markup']) }}
                     </td>
                     @if (!$card['type'])
                     <td class="positions">
-                        {!! Helper::lycdbMarkupToHtml($card['position_markup']) !!}
+                        {{ Helper::lycdbMarkupToHtml($card['position_markup']) }}
                     </td>
                     <td class="ap">
-                        {{ $card['ap'] }}
+                        {{{ $card['ap'] }}}
                     </td>
                     <td class="dp">
-                        {{ $card['dp'] }}
+                        {{{ $card['dp'] }}}
                     </td>
                     <td class="sp">
-                        {{ $card['sp'] }}
+                        {{{ $card['sp'] }}}
                     </td>
                     @else
                     <td class="positions">
@@ -165,69 +165,69 @@ We are already aware of this error and will fix it sometime soon so please don't
     <div id='hidden'>
         @if ($cards)
         @foreach($cards as $key => $card)
-        <div class="card_js {{ $card['type_text'] }}" id="card_js_{{ $card['cid'] }}" style="display: none;">
-            <div class="card_js_image" data-src="{{ asset("lycee_images/180/$card[cid]") }}" data-width="180">
+        <div class="card_js {{{ $card['type_text'] }}}" id="card_js_{{{ $card['cid'] }}}" style="display: none;">
+            <div class="card_js_image" data-src="{{{ asset("lycee_images/180/$card[cid]") }}}" data-width="180">
             </div>
             <div class="card_js_details">
                 <div class="card_js_id card_js_detail_left">
-                    <span>{{ $card['cid'] }}</span>
+                    <span>{{{ $card['cid'] }}}</span>
                 </div>
                 <div class="card_js_sets">
-                    <span>{!! nl2br(e($card['sets_string'])) !!}</span>
+                    <span>{{ nl2br(e($card['sets_string'])) }}</span>
                 </div>
                 <div class="card_js_name">
                     <span class="card_name card_js_detail_left">
-                        {{ $card['name_en'] }}
+                        {{{ $card['name_en'] }}}
                     </span>
                 </div>
                 <div class="card_js_name_jap">
                     <span class="card_name jap">
-                        {{ $card['name_jp'] }}
+                        {{{ $card['name_jp'] }}}
                     </span>
                 </div>
                 <div class="card_js_ex card_js_detail_left">
                     <span>
-                        <strong>Ex:</strong> {{ $card['ex'] }}
-                        {!! Helper::lycdbMarkupToHtml($card['elements_markup']) !!}
+                        <strong>Ex:</strong> {{{ $card['ex'] }}}
+                        {{ Helper::lycdbMarkupToHtml($card['elements_markup']) }}
                     </span>
                 </div>
                 <div class="card_js_cost">
                     <span>
-                        {!! Helper::lycdbMarkupToHtml($card['cost_markup']) !!}
+                        {{ Helper::lycdbMarkupToHtml($card['cost_markup']) }}
                     </span>
                 </div>
-                @if (\Lycee\Card\Model::CHAR == $card['type'])
+                @if (Lycee\Card\Eloquent::TYPE_CHAR == $card['type'])
                 <div class="card_js_ap_dp_sp card_js_detail_left">
-                <div class='left ap'>{{ $card['ap'] }}</div>
-                    <div class='left dp'>{{ $card['dp'] }}</div>
-                    <div class='left sp'>{{ $card['sp'] }}</div>
+                <div class='left ap'>{{{ $card['ap'] }}}</div>
+                    <div class='left dp'>{{{ $card['dp'] }}}</div>
+                    <div class='left sp'>{{{ $card['sp'] }}}</div>
                 </div>
                 <div class="card_js_spots">
-                    {!! Helper::lycdbMarkupToHtml($card['position_markup']) !!}
+                    {{ Helper::lycdbMarkupToHtml($card['position_markup']) }}
                 </div>
                 <div class="card_js_text card_js_detail_full">
                     @if ($card['conversion_jp'])
-                    <span class="conversion">{{ Lang::trans('Conversion') }}: {{ $card['conversion_jp'] }}</span>
+                    <span class="conversion">{{{ Lang::trans('Conversion') }}}: {{{ $card['conversion_jp'] }}}</span>
                     @endif
                     @if ($card['display_basic_abilities_jp_markup'])
                     @foreach ($card['display_basic_abilities_jp_markup'] as $basicAbility)
                     <p class="basic_ability_name">
-                        {!! Helper::lycdbMarkupToHtml($basicAbility) !!}
+                        {{ Helper::lycdbMarkupToHtml($basicAbility) }}
                     </p>
                     @endforeach
                     @endif
                     <p class="ability_name">
                         <span>
                             <span class="abilityName"><?php $cost = Helper::lycdbMarkupToHtml($card['ability_cost_jp']) ?>
-                            {{ $card['ability_name_jp'] }}@if ($card['ability_cost_jp']):@endif</span>
+                            {{{ $card['ability_name_jp'] }}}@if ($card['ability_cost_jp']):@endif</span>
                             @if ($card['ability_cost_jp'])
-                            <span class="cost">{!! Helper::lycdbMarkupToHtml($card['ability_cost_jp']) !!}</span>
+                            <span class="cost">{{ Helper::lycdbMarkupToHtml($card['ability_cost_jp']) }}</span>
                             @endif
                         </span>
                     </p>
                     <p class="card_text">
                         <span>
-                            {!! Helper::lycdbMarkupToHtml($card['ability_desc_jp']) !!}
+                            {{ Helper::lycdbMarkupToHtml($card['ability_desc_jp']) }}
                         </span>
                     </p>
                 </div>
@@ -235,7 +235,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                 <div class="card_js_text card_js_detail_full">
                     <p class="card_text">
                         <span>
-                            {!! Helper::lycdbMarkupToHtml($card['ability_desc_jp']) !!}
+                            {{ Helper::lycdbMarkupToHtml($card['ability_desc_jp']) }}
                         </span>
                     </p>
                 </div>

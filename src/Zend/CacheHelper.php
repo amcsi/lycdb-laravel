@@ -7,7 +7,6 @@ class CacheHelper
 {
 
     protected $cache;
-    private $defaultMinutes = 60 * 24 * 365 * 10;
 
     public function __construct(CacheRepository $cache)
     {

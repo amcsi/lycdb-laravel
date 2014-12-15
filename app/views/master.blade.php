@@ -48,7 +48,7 @@
     </div>
 
     <div id='content'>
-        @section('content')
+        @yield('content')
     </div>
     <div id='footer'>
         <div class="optimized">This website is optimized for the following browsers: <span class="browser">Opera 10+</span>, <span class="browser">FireFox 3.5+</span>, <span class="browser">Internet Explorer 7+</span>; and the resolution <span class="resolution">800x600</span>

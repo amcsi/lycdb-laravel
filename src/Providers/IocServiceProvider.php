@@ -14,6 +14,10 @@ class IocServiceProvider extends ServiceProvider {
     {
         $app = $this->app;
 
+        $app->singleton('imgBase', function ($app) {
+            return asset('img');
+        });
+
         $app->singleton('consoleLogger', function ($app) {
             $logger = new Logger('Console logger');
             $handler = new StreamHandler('php://stdout');
@@ -67,10 +71,35 @@ class IocServiceProvider extends ServiceProvider {
             return $amysql;
         });
 
+        $app->singleton('Lycee\Tool\MarkupToHtml', function ($app) {
+            $params = [
+                'imgBase' => $app->make('imgBase'),
+            ];
+            return $app->build('Lycee\Tool\MarkupToHtml', $params);
+        });
+
+        $app->singleton('Symfony\Component\Translation\TranslatorInterface', function ($app) {
+            return $app->make('translator');
+        });
+
+        $this->configServices();
+    }
+
+    public function configServices()
+    {
+        $app = $this->app;
+
         $app->singleton('Lycee\Config\Elements', function ($app) {
             $config = $app->make('config');
 
             return new \Lycee\Config\Elements($config->get('lycee.elements'));
         });
+
+        $app->singleton('Lycee\Config\BasicAbilities', function ($app) {
+            $config = $app->make('config');
+
+            return new \Lycee\Config\BasicAbilities($config->get('lycee.basic_abilities'));
+        });
+
     }
 }
