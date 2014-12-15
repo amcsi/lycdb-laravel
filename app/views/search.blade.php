@@ -126,7 +126,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                         {{{ $card['ex'] }}}
                     </td>
                     <td>
-                        {{ Helper::lycdbMarkupToHtml($card['elements_markup']) }}
+                        {{ Helper::lycdbMarkupToHtml(Helper::markupElementsByCard($card)) }}
                     </td>
                     @if (!$card['type'])
                     <td class="positions">
@@ -188,7 +188,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                 <div class="card_js_ex card_js_detail_left">
                     <span>
                         <strong>Ex:</strong> {{{ $card['ex'] }}}
-                        {{ Helper::lycdbMarkupToHtml($card['elements_markup']) }}
+                        {{ Helper::lycdbMarkupToHtml(Helper::markupElementsByCard($card)) }}
                     </span>
                 </div>
                 <div class="card_js_cost">

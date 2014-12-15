@@ -70,4 +70,20 @@ class Helper
 
         return $displayCost;
     }
+
+    public function markupElementsByCard(Eloquent $card)
+    {
+        $elements = $this->app->make('Lycee\Config\Elements');
+
+        $displayElements = '';
+
+        foreach ($elements as $element) {
+            $elementKey = $element['key'];
+            if (!empty($card["is_$elementKey"])) {
+                $displayElements .= "[$elementKey]";
+            }
+        }
+
+        return $displayElements;
+    }
 }
