@@ -120,7 +120,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                         {{ nl2br(e($card['sets_string_short']), false) }}
                     </td>
                     <td class="cost">
-                        {{ Helper::lycdbMarkupToHtml($card['cost_markup']) }}
+                        {{ Helper::lycdbMarkupToHtml(Helper::markupCostsByCard($card)) }}
                     </td>
                     <td class="ex">
                         {{{ $card['ex'] }}}
@@ -193,7 +193,7 @@ We are already aware of this error and will fix it sometime soon so please don't
                 </div>
                 <div class="card_js_cost">
                     <span>
-                        {{ Helper::lycdbMarkupToHtml($card['cost_markup']) }}
+                        {{ Helper::lycdbMarkupToHtml(Helper::markupCostsByCard($card)) }}
                     </span>
                 </div>
                 @if (Lycee\Card\Eloquent::TYPE_CHAR == $card['type'])

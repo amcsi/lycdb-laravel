@@ -55,4 +55,19 @@ class Helper
         return $tt;
     }
 
+    public function markupCostsByCard(Eloquent $card)
+    {
+        $elements = $this->app->make('Lycee\Config\Elements');
+
+        $displayCost = '';
+
+        foreach ($elements as $element) {
+            $elementKey = $element['key'];
+            if ($card["cost_$elementKey"]) {
+                $displayCost .= str_repeat("[$elementKey]", $card["cost_$elementKey"]);
+            }
+        }
+
+        return $displayCost;
+    }
 }
