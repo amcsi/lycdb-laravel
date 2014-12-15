@@ -160,9 +160,7 @@ We are already aware of this error and will fix it sometime soon so please don't
             </tbody>
         </table>
 
-        <?php echo $this->paginationControl($this->paginator, 'Elastic', 'application/search/partial/pagination.phtml'
-            , array('route' => $this->route));
-        ?>
+        [ Pagination ]
 
     <div id='hidden'>
         @if ($cards)

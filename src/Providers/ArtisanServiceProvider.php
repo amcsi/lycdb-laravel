@@ -34,8 +34,10 @@ class ArtisanServiceProvider extends ServiceProvider {
 
         $this->app->bindShared('commands.card', function()
         {
-            return new ImportCardsCommand;
+            return new \ImportCardsCommand;
         });
+
+        $this->commands('commands.card');
 	}
 
 }

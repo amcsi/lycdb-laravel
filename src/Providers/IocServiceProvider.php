@@ -37,7 +37,7 @@ class IocServiceProvider extends ServiceProvider {
         });
 
         $app->singleton('Lycee\Zend\CacheHelper', function ($app) {
-            $cachePath = storage_path() . '/framework/cache/lycee-tcg.com';
+            $cachePath = storage_path() . '/cache/lycee-tcg.com';
             $storageParams = [
                 'directory' => $cachePath,
             ];

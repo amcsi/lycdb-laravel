@@ -1,4 +1,4 @@
-<?php namespace Lycee\Console;
+<?php
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,7 +18,7 @@ class ImportCardsCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Imports Lycee cards.';
+	protected $description = 'Command description.';
 
 	/**
 	 * Create a new command instance.
@@ -49,7 +49,6 @@ class ImportCardsCommand extends Command {
 	protected function getArguments()
 	{
 		return array(
-			//array('example', InputArgument::REQUIRED, 'An example argument.'),
 		);
 	}
 

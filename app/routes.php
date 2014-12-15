@@ -17,7 +17,6 @@ $router->get('/', 'HomeController@index');
 
 $router->resource('search', 'SearchController');
 
-
 /*
 |--------------------------------------------------------------------------
 | Authentication & Password Reset Controllers

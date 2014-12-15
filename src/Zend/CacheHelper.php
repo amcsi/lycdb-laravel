@@ -1,7 +1,7 @@
 <?php
 namespace Lycee\Zend;
 
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Cache\Repository as CacheRepository;
 
 class CacheHelper
 {

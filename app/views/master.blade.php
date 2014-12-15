@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('v/jquery-ui/css/humanity/jquery-ui-1.10.3.custom.css') }}">
   <meta charset="utf-8">
     <script type='text/javascript' src='{{ asset('js/jquery-1.10.1.min.js') }}'></script>
-    <script type='text/javascript' src='{{ asset('v/jquery-ui/js/jquery-ui-1.10.3.custom.min.js }}'></script>
+    <script type='text/javascript' src='{{ asset('v/jquery-ui/js/jquery-ui-1.10.3.custom.min.js') }}'></script>
     <script type='text/javascript' src='{{ asset('js.js') }}'></script>
 
 </head>
@@ -32,12 +32,12 @@
     </div>
     <div id='nav'>
         <ul class="nav left">
-            <li><a href='{{ URL::route('search') }}'>Card search</a></li>
+            <li><a href='{{ URL::route('search.index') }}'>Card search</a></li>
             <li><a href=forums_url_base'>Forums</a></li>
         </ul>
         <ul class="nav right">
             @if ($forumsLoginBase = 'forums_url_base_https' /* 'forums_url_base' */) @endif
-            @if ($user['isLoggedIn'])
+            @if (false && $user['isLoggedIn'])
             <li><div><span>Welcome, <span class='nick'>{{ $user['usernameClean'] }}</span>!</span></div></li>
             <li><a href='{{ $forumsLoginBase }}/ucp.php?mode=logout&amp;sid={{ $user['sessionId'] }}&amp;redirect={{ URL::current() }}'>Logout</a></li>
             @else
