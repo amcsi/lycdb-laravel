@@ -58,7 +58,7 @@ class Eloquent extends Model {
         }
 
         if (!empty($options['name'])) {
-            $this->contains('name_jp', $options['name']);
+            $builder->contains('name_jp', $options['name']);
         }
 
         if (isset($options['type']) && -2 < ($type = $options['type'])) {
@@ -66,21 +66,21 @@ class Eloquent extends Model {
              * Not a character
              */
             if (-1 == $type) {
-                $this->where('type', '!=', self::TYPE_CHAR);
+                $builder->where('type', '!=', self::TYPE_CHAR);
             }
             else {
-                $this->where('type', '=', $type);
+                $builder->where('type', '=', $type);
             }
         }
         if (!empty($options['cost'])) {
             $costType = isset($options['cost_type']) ? $options['cost_type'] : 0;
             // payable by
             if (1 == $costType) {
-                $this->costsPayableBy($options['cost']);
+                $this->costsPayableBy($builder, $options['cost']);
             }
             // exact cost
             else if (2 == $costType) {
-                $this->costsExactly($options['cost']);
+                $this->costsExactly($builder, $options['cost']);
             }
         }
 
@@ -251,7 +251,7 @@ class Eloquent extends Model {
         $query->orWhere($column, 'LIKE', '%' . $escapedValue . '%');
     }
 
-    public function scopeCostsExactly(Builder $query, array $costs)
+    private function costsExactly(Builder $query, array $costs)
     {
         foreach ($this->elements as $enum => $element) {
             $elementKey = $element['key'];
@@ -260,21 +260,22 @@ class Eloquent extends Model {
         }
     }
 
-    public function scopeCostsPayableBy(Builder $query, array $costs)
+    private function costsPayableBy(Builder $query, array $costs)
     {
         $total = 0;
         $starWheres = [];
         foreach ($this->elements as $key => $element) {
             $costAmount = isset($costs[$key]) ? $costs[$key] : 0;
             $total += $costAmount;
-            $starWheres[] = "cost_$element";
+            $elementName = $element['key'];
+            $starWheres[] = "cost_$elementName";
             if ($element !== 'star') {
-                $query->where("cost_$element", '<=', $costAmount);
+                $query->where("cost_$elementName", '<=', $costAmount);
             }
         }
         if ($starWheres) {
             $columns = join (' + ', $starWheres);
-            $query->where($columns, '<=', $total);
+            $query->getQuery()->whereRaw("$columns <= $total");
         }
     }
 
@@ -293,25 +294,26 @@ class Eloquent extends Model {
         if (isset($options['element'])) {
             $elementType = isset($options['element_type']) ? $options['element_type'] : 1;
             // has
-            if (1 == $elementType) {
+            if (1 == $elementType) {{
                 foreach ($elements as $enum => $element) {
                     $elementKey = $element['key'];
                     if ('star' === $elementKey) {
                         continue;
                     }
-                    if (!empty($options['element'][$enum])) {
+                    if (!empty($options['element'][$elementKey]))
                         $builder->where("is_$elementKey", '!=', 0);
                     }
                 }
             }
             // is
             else if (2 == $elementType) {
-                foreach ($elements as $key => $element) {
-                    if ('star' === $element) {
+                foreach ($elements as $enum => $element) {
+                    $elementKey = $element['key'];
+                    if ('star' === $elementKey) {
                         continue;
                     }
-                    $op = !empty($options['element'][$key]) ? '!=' : '=';
-                    $builder->where("is_$element", $op, 0);
+                    $op = !empty($options['element'][$elementKey]) ? '!=' : '=';
+                    $builder->where("is_$elementKey", $op, 0);
                 }
             }
         }
