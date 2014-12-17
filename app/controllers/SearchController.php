@@ -85,7 +85,7 @@ class SearchController extends Controller {
         $vars['selectableOperators'] = $selectableOperators;
 
         $selectableElementTypes = [
-            0 => '_',
+            0 => '-',
             1 => $_->trans('has:'),
             2 => $_->trans('is:'),
         ];
