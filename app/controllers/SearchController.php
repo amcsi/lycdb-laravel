@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Translation\Translator;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 use Lycee\Card\FetchService;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class SearchController extends Controller {
 
@@ -18,17 +20,22 @@ class SearchController extends Controller {
      * @var Request
      */
     private $request;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
      * @param FetchService $fetchService
      * @param ViewFactory $viewFactory
      * @param Request $request
      */
-    public function __construct(FetchService $fetchService, ViewFactory $viewFactory, Request $request)
+    public function __construct(FetchService $fetchService, ViewFactory $viewFactory, Request $request, TranslatorInterface $translator)
     {
         $this->fetchService = $fetchService;
         $this->viewFactory = $viewFactory;
         $this->request = $request;
+        $this->translator = $translator;
     }
     /**
      * Display a listing of the resource.
@@ -50,6 +57,39 @@ class SearchController extends Controller {
 
         $vars = [];
         $vars['cards'] = $results;
+
+        $_ = $this->translator;
+
+        $selectableCardTypes = [
+            -2 => '-',
+            -1 => $_->trans('non-character'),
+            0 => $_->trans('Character'),
+            1 => $_->trans('Area'),
+            2 => $_->trans('Item'),
+            3 => $_->trans('Event'),
+        ];
+        $vars['selectableCardTypes'] = $selectableCardTypes;
+
+        $selectableCostTypes = [
+            0 => '-',
+            1 => $_->trans('payable by:'),
+            2 => $_->trans('is exactly:'),
+        ];
+        $vars['selectableCostTypes'] = $selectableCostTypes;
+
+        $selectableOperators = [
+            1 => '≥',
+            0 => '=',
+            -1 => '≤',
+        ];
+        $vars['selectableOperators'] = $selectableOperators;
+
+        $selectableElementTypes = [
+            0 => '_',
+            1 => $_->trans('has:'),
+            2 => $_->trans('is:'),
+        ];
+        $vars['selectableElementTypes'] = $selectableElementTypes;
 
         return $viewFactory->make('search', $vars);
     }

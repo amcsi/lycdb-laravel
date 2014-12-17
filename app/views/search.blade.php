@@ -10,62 +10,78 @@
                 <ul>
                     <li>
                         <label for='basic_search_cid' class="form_title">ID</label>
-                        <input class="card_name" id='basic_search_cid' type='text' name='cid' value=''>
+                        {{ Form::text('cid', Request::get('cid'), [
+                            'id' => 'basic_search_cid',
+                        ]) }}
                     </li>
                     <li>
                         <label for='basic_search_name' class="form_title">Card name</label>
-                        <input class="card_name" id='basic_search_name' type='text' name='name' value=''>
+                        {{ Form::text('name', Request::get('name'), [
+                            'id' => 'basic_search_name',
+                        ]) }}
                     </li>
                     <li>
                         <label for='basic_search_card_type' class="form_title">Card type</label>
-                        <select id='basic_search_card_type' name='card_type'>
-                            <option value='-2' selected="selected">-</option>
-                            <option value='-1'>non-character</option>
-                            <option value='0'>Character</option>
-                            <option value='1'>Area</option>
-                            <option value='2'>Item</option>
-                            <option value='3'>Event</option>
-
-                        </select>
+                        {{ Form::select(
+                            'card_type',
+                            $selectableCardTypes,
+                            null !== ($ct = Request::get('card_type')) ? $ct : '-2',
+                            [
+                                'id' => 'basic_search_card_type',
+                            ]
+                        ) }}
                     </li>
                     <li>
-                        <label for='basic_search_name' class="form_title">Cost</label>
-                        <select id='basic_search_cost_type' name='cost_type'>
-                            <option value="0" selected="selected">-</option>
-                            <option value="1">payable by:</option>
-                            <option value="2">is exactly:</option>
-                        </select>
+                        <label for='basic_search_cost_type' class="form_title">Cost</label>
+                        {{ Form::select(
+                            'cost_type',
+                            $selectableCostTypes,
+                            Request::get('cost_type'),
+                            [
+                                'id' => 'basic_search_cost_type',
+                            ]
+                        ) }}
                         @foreach ($lyceeConfig['elements'] as $element)
                         <label for="basic_search_cost_{{{ $element['key'] }}}"><img alt='{{{ $element['key'] }}}' src="{{{asset("img/$element[key].gif")}}}"></label>
-                        {{ Form::selectRange("cost_$element[key]", 0, $lyceeConfig['max_cost'], ['id' => "cost_$element[key]"]) }}
+                        {{ Form::selectRange("cost_$element[key]", 0, $lyceeConfig['max_cost'], Request::get("cost_$element[key]"), ['id' => "cost_$element[key]"]) }}
                         @endforeach
                     </li>
                     <li>
                         <label for='basic_search_name' class="form_title">Ex</label>
-                        <select id="basic_search_ex_operator" name="ex_operator">
-                            <option value="1" selected="selected">≥</option>
-                            <option value="0">=</option>
-                            <option value="-1">≤</option>
-                        </select>
-                        {{ Form::selectRange('ex', 0, $lyceeConfig['max_ex'], ['id' => 'basic_search_ex']) }}
+                        {{ Form::select(
+                            'ex_operator',
+                            $selectableOperators,
+                            Request::get('ex_operator'),
+                            [
+                                'id' => 'basic_search_ex_operator',
+                            ]
+                        ) }}
+                        {{ Form::selectRange('ex', 0, $lyceeConfig['max_ex'], Request::get('ex'), ['id' => 'basic_search_ex']) }}
                     </li>
                     <li>
                         <label class="form_title">Element</label>
-                        <select id='basic_search_element_type' name='element_type'>
-                            <option value='0'>-</option>
-                            <option value='1'>has:</option>
-                            <option value='2'>is:</option>
-                        </select>
+                        {{ Form::select(
+                            'element_type',
+                            $selectableElementTypes,
+                            Request::get('element_type'),
+                            [
+                                'id' => 'basic_search_element_type',
+                            ]
+                        ) }}
                         @foreach ($lyceeConfig['elements'] as $element)
                         <label for="basic_search_element_{{{ $element['key'] }}}">
                             <img alt='{{{ $element['key'] }}}' src="{{{asset("img/$element[key].gif")}}}">
                         </label>
-                        <input type="checkbox" id="basic_search_element_{{{ $element['key'] }}}" name="element_{{{ $element['key'] }}}">
+                        {{ Form::checkbox("element_$element[key]", 1, Request::get("element_$element[key]"), [
+                            'id' => "basic_search_element_$element[key]",
+                        ]) }}
                         @endforeach
                     </li>
                     <li>
                         <label for='basic_search_text' class="form_title">Text contains</label>
-                        <input class="card_text" id='basic_search_text' type='text' name='text' value=''>
+                        {{ Form::text('text', Request::get('text'), [
+                            'id' => 'basic_search_text',
+                        ]) }}
                     </li>
                     <li>
                         <label for='basic_search_text' class="form_title">&nbsp;</label>
