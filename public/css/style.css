@@ -214,9 +214,12 @@ div.register_error { font-size:50%; color:red; }
 span.nick { display:inline; margin:0px; padding:0px; font-weight:bold; }
 
 span.target {
-    color:red;
+    color: red;
 }
-p.ability_name {
+span.cost {
+    color: blue;
+}
+span.abilityName {
     font-weight:bold;
 }
 .card_js {
