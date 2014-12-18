@@ -78,11 +78,18 @@ class Helper
 
         $displayElements = '';
 
+        $anyElements = false;
         foreach ($elements as $element) {
             $elementKey = $element['key'];
             if (!empty($card["is_$elementKey"])) {
+                $anyElements = true;
                 $displayElements .= "[$elementKey]";
             }
+        }
+
+        // If the card doesn't have an element, its element is STAR
+        if (!$anyElements) {
+            $displayElements .= "[star]";
         }
 
         return $displayElements;
