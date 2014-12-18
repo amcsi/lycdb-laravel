@@ -39,7 +39,7 @@ class FetchService
      * @param array $requestVars
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getByRequest(array $requestVars)
+    public function getByRequest(array $requestVars, &$paginator)
     {
         $mergeKeys = ['cid', 'name', 'cost_type', 'element_type', 'ex', 'text', 'page'];
         $options = array_intersect_key($requestVars, array_flip($mergeKeys));
@@ -71,7 +71,7 @@ class FetchService
                 $options['element'][$key] = (bool) $requestVars["element_$key"];
             }
         }
-        $results = $this->eloquent->getByOptions($options);
+        $results = $this->eloquent->getByOptions($options, $paginator);
 
         return $results;
     }

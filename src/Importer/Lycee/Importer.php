@@ -550,7 +550,7 @@ class Importer {
         $pattern = '@<img [^>]*alt="([^"]*)"[^>]*>@';
         $html = preg_replace_callback($pattern, array ($this, 'imageReplaceCallback'), $html);
         $html = preg_replace('@<span class="red">([^<]*?)</span>@', '[target]\1[/target]', $html);
-        $html = preg_replace('@<span class="blue_c">([^<]*?)</span>@', '[color=blue]\1[/color]', $html);
+        $html = preg_replace('@<span class="blue_c">([^<]*?)</span>@', '[cost]\1[/cost]', $html);
         $html = str_replace('<br>', "\n", $html);
         if (false !== strpos($html, '<')) {
             $msg = sprintf("There still is HTML in the marked up result: %s", $html);

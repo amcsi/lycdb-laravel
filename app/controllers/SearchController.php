@@ -53,7 +53,7 @@ class SearchController extends Controller {
         $options['pref_lang'] = 'en'; // prefer english
 
         $requestVars = $request->all();
-        $results = $fetchService->getByRequest($requestVars);
+        $results = $fetchService->getByRequest($requestVars, $paginator);
 
         $vars = [];
         $vars['cards'] = $results;
@@ -90,6 +90,7 @@ class SearchController extends Controller {
             2 => $_->trans('is:'),
         ];
         $vars['selectableElementTypes'] = $selectableElementTypes;
+        $vars['paginator'] = $paginator;
 
         return $viewFactory->make('search', $vars);
     }

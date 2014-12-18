@@ -39,7 +39,7 @@ class Eloquent extends Model {
         $this->elements = $elements;
     }
 
-    public function getbyOptions($options = array ())
+    public function getbyOptions($options = array (), &$paginator)
     {
         $elements = $this->getElements();
         $perPage = min(50, max(10, isset($options['perPage']) ? (int) $options['perPage'] : 50));
@@ -104,8 +104,7 @@ class Eloquent extends Model {
 
         $this->resolveText($builder, $options);
 
-        //$builder->paginate($perPage);
-        $builder->limit($perPage);
+        $paginator = $builder->paginate($perPage);
 
         //dd($builder->getQuery()->toSql());
 

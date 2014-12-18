@@ -91,7 +91,7 @@
             </fieldset>
         </form>
 
-        [ Pagination ]
+        {{ $paginator->links() }}
 
         <table class="card_results">
             <thead>
@@ -176,7 +176,7 @@ We are already aware of this error and will fix it sometime soon so please don't
             </tbody>
         </table>
 
-        [ Pagination ]
+        {{ $paginator->links() }}
 
     <div id='hidden'>
         @if ($cards)
