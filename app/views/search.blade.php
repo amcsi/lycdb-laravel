@@ -91,6 +91,11 @@
             </fieldset>
         </form>
 
+        <p>
+            Found <strong>{{ $paginator->getTotal() }}</strong> results.<br>
+            Displaying {{ $paginator->count() }}.<br><br>
+        </p>
+
         {{ $paginator->links() }}
 
         <table class="card_results">

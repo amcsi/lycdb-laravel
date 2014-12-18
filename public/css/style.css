@@ -331,3 +331,11 @@ td.cardName img {
 .basic_ability_name .basicAbility {
     margin-right: 5px;
 }
+.pagination li {
+    margin-left: 2px;
+    margin-right: 2px;
+    display: inline-block;
+}
+strong {
+    font-weight: bold;
+}
